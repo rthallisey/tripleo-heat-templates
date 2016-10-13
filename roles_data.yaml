@@ -20,6 +20,11 @@
 
 - name: Controller
   CountDefault: 1
+  Networks:
+    - External
+    - Internal
+    - Storage
+    - Tenant
   ServicesDefault:
     - OS::TripleO::Services::CACerts
     - OS::TripleO::Services::CephMon
@@ -98,6 +103,8 @@
 
 - name: Compute
   CountDefault: 1
+  Networks:
+    - External
   HostnameFormatDefault: '%stackname%-novacompute-%index%'
   ServicesDefault:
     - OS::TripleO::Services::CACerts
@@ -150,6 +157,7 @@
     - OS::TripleO::Services::SensuClient
     - OS::TripleO::Services::FluentdClient
     - OS::TripleO::Services::VipHosts
+
 
 - name: CephStorage
   ServicesDefault:

@@ -6,6 +6,14 @@
 # environment files we should think about using it here to automatically
 # include network-isolation-v6.yaml.
 resource_registry:
+{% for role in roles %}
+   {% if role.name == 'Controller' %}
+  OS::TripleO::{{role.name}}::Net::SoftwareConfig: ../network/config/single-nic-vlans/{{role.name.lower()}}-v6.yaml
+   {% else %}
+  OS::TripleO::{{role.name}}::Net::SoftwareConfig: ../network/config/single-nic-vlans/{{role.name.lower()}}.yaml
+   {% endif %}
+{% endfor %}
+
   OS::TripleO::BlockStorage::Net::SoftwareConfig: ../network/config/multiple-nics/cinder-storage.yaml
   OS::TripleO::Compute::Net::SoftwareConfig: ../network/config/multiple-nics/compute.yaml
   OS::TripleO::Controller::Net::SoftwareConfig: ../network/config/multiple-nics/controller-v6.yaml
